@@ -1,15 +1,22 @@
+
 async function getMenu() {
   try {
     let res = await fetch("https://raw.githubusercontent.com/saksham-accio/2_contest_3/main/food.json");
     let data = await res.json();
     let menuDiv = document.getElementById("menu");
-    menuDiv.innerHTML = "";
+    menuDiv.innerHTML = ""; 
+
     data.forEach(item => {
       let div = document.createElement("div");
       div.classList.add("item");
-      div.innerHTML = <h3>${item.name}</h3><p>₹${item.price}</p>;
+      div.innerHTML = `
+        <img src="${item.imgSrc}" alt="${item.name}">
+        <h3>${item.name}</h3>
+        <p>₹${item.price}</p>
+      `;
       menuDiv.appendChild(div);
     });
+
     return data;
   } catch (err) {
     console.error("Error loading menu:", err);
@@ -17,6 +24,7 @@ async function getMenu() {
   }
 }
 
+// Simulate order steps
 function takeOrder(menu) {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -56,9 +64,8 @@ function payOrder(order) {
 function thankyouFn() {
   showMessage("🙏 Thank you for eating with us today!");
 }
-
 async function startOrder() {
-  document.getElementById("statusBox").innerHTML = ""; 
+  document.getElementById("statusBox").innerHTML = ""; // clear previous
   let menu = await getMenu();
   let order = await takeOrder(menu);
   let prepared = await orderPrep(order);
@@ -70,4 +77,6 @@ function showMessage(msg) {
   div.textContent = msg;
   document.getElementById("statusBox").appendChild(div);
 }
+
+// Load menu on page load
 window.onload = getMenu;
