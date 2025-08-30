@@ -2,26 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Burger Palace</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Restaurant - Home</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="navbar">
-    <h1>🍔 Burger Palace</h1>
-  </header>
-  <section class="hero">
-    <h2>Welcome to Burger Palace</h2>
-    <p>Delicious burgers made just for you. Order now and enjoy a quick meal!</p>
-    <button onclick="startOrder()">Start Order</button>
-  </section>
-  <section>
-    <h2 class="section-title">Our Menu</h2>
-    <div id="menu" class="menu"></div>
-  </section>
-  <section>
-    <h2 class="section-title">📦 Order Status</h2>
-    <div id="statusBox" class="status-box"></div>
-  </section>
-  <script src="script.js"></script>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Food Menu</h2>
+      <ul>
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="menu.html">🍔 Menu</a></li>
+        <li>🧾 Orders</li>
+        <li>👤 Profile</li>
+        <li>🚪 Logout</li>
+      </ul>
+    </aside>
+    <main class="main">
+      <section class="banner">
+        <div class="banner-text">
+          <h1>Weekend Special <br> Delicious Food Menu</h1>
+          <p>UP TO <b>50% OFF</b></p>
+          <a href="menu.html"><button class="btn">Order Now</button></a>
+        </div>
+        <div class="banner-img">
+          <img src="https://i.ibb.co/gMNTyG1/burger.png" alt="burger">
+        </div>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
