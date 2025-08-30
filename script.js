@@ -3,6 +3,7 @@ async function getMenu() {
     let res = await fetch("https://raw.githubusercontent.com/saksham-accio/2_contest_3/main/food.json");
     let data = await res.json();
     let menuDiv = document.getElementById("menu");
+    menuDiv.innerHTML = "";
     data.forEach(item => {
       let div = document.createElement("div");
       div.classList.add("item");
@@ -57,7 +58,7 @@ function thankyouFn() {
 }
 
 async function startOrder() {
-  document.getElementById("statusBox").innerHTML = "";
+  document.getElementById("statusBox").innerHTML = ""; 
   let menu = await getMenu();
   let order = await takeOrder(menu);
   let prepared = await orderPrep(order);
@@ -69,5 +70,4 @@ function showMessage(msg) {
   div.textContent = msg;
   document.getElementById("statusBox").appendChild(div);
 }
-
 window.onload = getMenu;
