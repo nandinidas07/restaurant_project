@@ -12,16 +12,20 @@ async function getMenu() {
     return data;
   } catch (err) {
     console.error("Error loading menu:", err);
+    showMessage("❌ Failed to load menu. Please try again.");
   }
 }
 
 function takeOrder(menu) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      let order = {
-        items: [menu[0], menu[1], menu[2]] 
-      };
-      console.log("Order taken:", order);
+      let randomItems = [];
+      for (let i = 0; i < 3; i++) {
+        let rand = Math.floor(Math.random() * menu.length);
+        randomItems.push(menu[rand]);
+      }
+      let order = { items: randomItems };
+      showMessage("✅ Order taken: " + order.items.map(i => i.name).join(", "));
       resolve(order);
     }, 2500);
   });
@@ -32,7 +36,7 @@ function orderPrep(order) {
     setTimeout(() => {
       order.status = true;
       order.paid = false;
-      console.log("Order prepared:", order);
+      showMessage("👨‍🍳 Order is prepared!");
       resolve(order);
     }, 1500);
   });
@@ -42,21 +46,28 @@ function payOrder(order) {
   return new Promise((resolve) => {
     setTimeout(() => {
       order.paid = true;
-      console.log("Order paid:", order);
+      showMessage("💳 Payment successful!");
       resolve(order);
     }, 1000);
   });
 }
 
 function thankyouFn() {
-  alert("Thank you for eating with us today!");
+  showMessage("🙏 Thank you for eating with us today!");
 }
 
 async function startOrder() {
+  document.getElementById("statusBox").innerHTML = "";
   let menu = await getMenu();
   let order = await takeOrder(menu);
   let prepared = await orderPrep(order);
   let paid = await payOrder(prepared);
   if (paid.paid) thankyouFn();
 }
+function showMessage(msg) {
+  let div = document.createElement("p");
+  div.textContent = msg;
+  document.getElementById("statusBox").appendChild(div);
+}
+
 window.onload = getMenu;
